@@ -1,3 +1,5 @@
+require 'set'
+
 class Node
 
     def initialize(value, left_child=nil, right_child=nil)
@@ -15,9 +17,14 @@ class Tree
     end
 
     def build_tree(arr)
-        #need to sort it
-        #need to remove duplicates
+        new_arr = arr.sort
+        new_set = new_arr.to_set
         
+        #need to sort it, sort
+        #need to remove duplicates, save all the elements in a set, convert the set to an array later
+        
+
+        return @root
     end
 
 end
