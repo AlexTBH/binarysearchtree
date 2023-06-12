@@ -48,7 +48,7 @@ class Tree
 end
 
 
-
+#git test
 
 array1 = [1, 2, 3, 4 ,5, 6, 7, 8]
 newTree = Tree.new(array1)
