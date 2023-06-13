@@ -1,4 +1,5 @@
 require 'set'
+require 'pry-byebug'
 
 
 class Node
@@ -15,12 +16,10 @@ class Tree
     attr_accessor :root
 
     def initialize(arr)
-        @root = build_tree(cleanArray(arr))
-        
+        @root = build_tree(cleanArray(arr)) 
     end
 
     def build_tree(arr)
-
         return nil if arr.empty?        
 
         half = (arr.size-1) / 2
@@ -28,9 +27,8 @@ class Tree
         
         root.left = build_tree(arr[0...half])
         root.right = build_tree(arr[(half +1)..-1])       
-        
 
-        root
+        return root
     end
 
     def cleanArray(arr)
@@ -39,20 +37,26 @@ class Tree
         arr = new_set.to_a
     end
 
+    #This method is taken from TOP
+
     def pretty_print(node = @root, prefix = '', is_left = true)
-        pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
+
+        pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '.    '}", false) if node.right
+
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+
         pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
 
+    def insertNode(num)
+        if root.data > num
+            puts root.data
+        end
+    end
 end
 
 
-
-
-array1 = [1, 2, 3, 4 ,5, 6, 7, 8]
+array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 newTree = Tree.new(array1)
 newTree.pretty_print
-
-
-# 1, 2, 3, 4, 5, 8, 9, 10, 11, 12
+#newTree.insertNode(1)
