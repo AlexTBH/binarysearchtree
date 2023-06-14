@@ -40,17 +40,21 @@ class Tree
     #This method is taken from TOP
 
     def pretty_print(node = @root, prefix = '', is_left = true)
-
-        pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '.    '}", false) if node.right
-
+        pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
-
         pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
 
-    def insertNode(num)
-        if root.data > num
-            puts root.data
+    def insertNode(num, node = @root)
+        if (num > node.data && num < node.right.data)
+            root = Node.new(num)
+            temp = node.right
+            temp.left = root
+            node.right = root
+        elsif (num > root.data)
+            insertNode(num, root.right)
+        elsif num < node.data
+            insertNode(node.left, num)
         end
     end
 end
@@ -59,4 +63,5 @@ end
 array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 newTree = Tree.new(array1)
 newTree.pretty_print
-#newTree.insertNode(1)
+newTree.insertNode(10)
+newTree.pretty_print
