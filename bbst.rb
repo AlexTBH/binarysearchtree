@@ -47,17 +47,23 @@ class Tree
 
     def insertNode(num, node = @root)
         
-        return nil if !node
-
-        if num > node.data
-            insertNode(num, node.right)
-        elsif num < node.data
-            insertNode(num, node.left)
-        end
+        return nil if node == nil
         
+        insertNode(num, node.right) if num > node.data
+        insertNode(num, node.left) if num < node.data
+
+        #For example node with data 10
+        #it needs to be inserted as Node 9's right child and node 23's left child
+        #Node 10 needs to append node 23 as right child
+
         if num < node.data
             newNode = Node.new(num)
+            node.left = newNode
+        elsif num > node.data
+            newNode = Node.new(num)
+            node.right = newNode
             
+        end
     end
 end
 
@@ -66,4 +72,4 @@ array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 newTree = Tree.new(array1)
 newTree.pretty_print
 newTree.insertNode(10)
-#newTree.pretty_print
+newTree.pretty_print
