@@ -38,32 +38,27 @@ class Tree
         arr = new_set.to_a
     end
 
-    #This method is taken from TOP
+    #This method is taken from TOP to visualise the tree while working on it
     def pretty_print(node = @root, prefix = '', is_left = true)
         pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
         puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
         pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
 
-    def insertNode(num, node = @root)
-        
-        return nil if node == nil
-        
-        insertNode(num, node.right) if num > node.data
-        insertNode(num, node.left) if num < node.data
-
-        #For example node with data 10
-        #it needs to be inserted as Node 9's right child and node 23's left child
-        #Node 10 needs to append node 23 as right child
+    #Had to take at RoPalma 95 @ GitHub for solution since I couldn't figure out this one 
+    def insertNode(num, node = root)
+        reutrn nil if num == node.data
 
         if num < node.data
-            newNode = Node.new(num)
-            node.left = newNode
-        elsif num > node.data
-            newNode = Node.new(num)
-            node.right = newNode
-            
+            node.left.nil? ? node.left = Node.new(num) : insertNode(num, node.left)
+        else
+            node.right.nil? ? node.right = Node.new(num) : insertNode(num, node.right)
         end
+    end
+    
+    #Work on this next
+    def deleteNode(num, node = root)
+        
     end
 end
 
@@ -71,5 +66,8 @@ end
 array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 newTree = Tree.new(array1)
 newTree.pretty_print
+newTree.insertNode(6)
 newTree.insertNode(10)
+newTree.insertNode(11)
+newTree.insertNode(12)
 newTree.pretty_print
