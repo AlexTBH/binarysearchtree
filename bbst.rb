@@ -46,18 +46,19 @@ class Tree
     end
 
     #Had to take at RoPalma 95 @ GitHub for solution since I couldn't figure out this one 
-    def insertNode(num, node = root)
-        reutrn nil if num == node.data
+    def insertNode(value, node = root)
+        reutrn nil if value == node.data
 
-        if num < node.data
-            node.left.nil? ? node.left = Node.new(num) : insertNode(num, node.left)
+        if value < node.data
+            node.left.nil? ? node.left = Node.new(value) : insertNode(value, node.left)
         else
-            node.right.nil? ? node.right = Node.new(num) : insertNode(num, node.right)
+            node.right.nil? ? node.right = Node.new(value) : insertNode(value, node.right)
         end
     end
     
     #Work on this next
-    def deleteNode(num, node = root)
+    def deleteNode(value, node = root)
+        #check if node == value?, if true -> remove the node connections to its kids and parents
         
     end
 end
@@ -70,4 +71,5 @@ newTree.insertNode(6)
 newTree.insertNode(10)
 newTree.insertNode(11)
 newTree.insertNode(12)
+newTree.insertNode(22)
 newTree.pretty_print
