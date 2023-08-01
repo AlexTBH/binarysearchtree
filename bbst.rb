@@ -28,7 +28,6 @@ class Tree
         root.left = build_tree(arr[0...half])
         root.right = build_tree(arr[(half +1)..-1])       
         
-
         return root
     end
 
@@ -57,19 +56,32 @@ class Tree
     end
     
     #Work on this next
-    def deleteNode(value, node = root)
-        #check if node == value?, if true -> remove the node connections to its kids and parents
+    def deleteNode(value, node = root, parentNode = nil, is_left = true)
+        #Recursive function until the node.data match the value input.
+        #Use "is_left = true" to figure out if the child node is right or left of the rootnode.
+        #Reach the value of the to be deleted node, then use temp variable for the parent node to delete the chidl node
         
+        return nil if node == nil
+
+        if value < node.data
+            node.left.nil? ? return : deleteNode(value, node.left, node, true)
+        elsif value > node.data
+            node.right.nil? ? return : deleteNode(value, node.right, node, false)
+        else
+            is_left ? parentNode.left = nil : parentNode.right = nil
+        end
     end
 end
 
 
 array1 = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 newTree = Tree.new(array1)
-newTree.pretty_print
+
 newTree.insertNode(6)
 newTree.insertNode(10)
 newTree.insertNode(11)
 newTree.insertNode(12)
 newTree.insertNode(22)
+
+newTree.deleteNode(3)
 newTree.pretty_print
