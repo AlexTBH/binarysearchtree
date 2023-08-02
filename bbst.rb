@@ -67,9 +67,10 @@ class Tree
             node.left.nil? ? return : deleteNode(value, node.left, node, true)
         elsif value > node.data
             node.right.nil? ? return : deleteNode(value, node.right, node, false)
-        else
-            is_left ? parentNode.left = nil : parentNode.right = nil
         end
+
+        is_left ? parentNode.left = nil : parentNode.right = nil if node.data == value
+        
     end
 end
 
@@ -82,6 +83,6 @@ newTree.insertNode(10)
 newTree.insertNode(11)
 newTree.insertNode(12)
 newTree.insertNode(22)
-
+newTree.pretty_print
 newTree.deleteNode(3)
 newTree.pretty_print
