@@ -55,11 +55,8 @@ class Tree
         end
     end
     
-    #Work on this next
+    
     def deleteNode(value, node = root, parentNode = nil, is_left = true)
-        #Recursive function until the node.data match the value input.
-        #Use "is_left = true" to figure out if the child node is right or left of the rootnode.
-        #Reach the value of the to be deleted node, then use temp variable for the parent node to delete the chidl node
         
         return nil if node == nil
 
@@ -69,8 +66,11 @@ class Tree
             node.right.nil? ? return : deleteNode(value, node.right, node, false)
         end
 
+        #Work on below next
+
         is_left ? parentNode.left = nil : parentNode.right = nil if node.data == value
-        
+        node.right.nil? ? return : parentNode.right = node.right if node.data == value && parentNode.right.nil?
+        node.left.nil? ? return : parentNode.left = node.left if node.data == value && parentNode.left.nil?
     end
 end
 
@@ -84,5 +84,5 @@ newTree.insertNode(11)
 newTree.insertNode(12)
 newTree.insertNode(22)
 newTree.pretty_print
-newTree.deleteNode(3)
+newTree.deleteNode(67) #Find a solutions to this node
 newTree.pretty_print
