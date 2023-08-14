@@ -66,9 +66,10 @@ class Tree
             node.right.nil? ? return : deleteNode(value, node.right, node, false)
         end
 
-        #Work on below next
+        #Work on below next, use inordersucessor for nodes with two children
 
         is_left ? parentNode.left = nil : parentNode.right = nil if node.data == value
+         
         node.right.nil? ? return : parentNode.right = node.right if node.data == value && parentNode.right.nil?
         node.left.nil? ? return : parentNode.left = node.left if node.data == value && parentNode.left.nil?
     end
