@@ -55,23 +55,22 @@ class Tree
         end
     end
     
-    
-    def deleteNode(value, node = root, parentNode = nil, is_left = true)
+
+    def deleteNode(value, node = root)
         
         return nil if node == nil
 
         if value < node.data
-            node.left.nil? ? return : deleteNode(value, node.left, node, true)
+            node.left = deleteNode(value, node.left)
         elsif value > node.data
-            node.right.nil? ? return : deleteNode(value, node.right, node, false)
+            node.right = deleteNode(value, node.right)
+        else
+            return node.left if node.left.nil?
+            return node.right if node.right.nil?        
+
+            #continue to work here for 1-2 child nodes
         end
-
-        #Work on below next, use inordersucessor for nodes with two children
-
-        is_left ? parentNode.left = nil : parentNode.right = nil if node.data == value
-         
-        node.right.nil? ? return : parentNode.right = node.right if node.data == value && parentNode.right.nil?
-        node.left.nil? ? return : parentNode.left = node.left if node.data == value && parentNode.left.nil?
+        node
     end
 end
 
@@ -85,5 +84,5 @@ newTree.insertNode(11)
 newTree.insertNode(12)
 newTree.insertNode(22)
 newTree.pretty_print
-newTree.deleteNode(67) #Find a solutions to this node
+newTree.deleteNode(3) 
 newTree.pretty_print
