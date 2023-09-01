@@ -1,7 +1,5 @@
 require 'set'
 
-
-
 class Node
     attr_accessor :data, :left, :right
 
@@ -65,10 +63,12 @@ class Tree
         elsif value > node.data
             node.right = deleteNode(value, node.right)
         else
-            return node.left if node.left.nil?
-            return node.right if node.right.nil?        
+            return node.left if node.right.nil?
+            return node.right if node.left.nil?        
 
-            #continue to work here for 1-2 child nodes
+            #continue to work here for 2 child nodes
+            temp = nil
+
         end
         node
     end
@@ -84,5 +84,8 @@ newTree.insertNode(11)
 newTree.insertNode(12)
 newTree.insertNode(22)
 newTree.pretty_print
-newTree.deleteNode(3) 
+newTree.deleteNode(7)
+newTree.deleteNode(3)
+newTree.insertNode(17)
+newTree.insertNode(18)
 newTree.pretty_print
