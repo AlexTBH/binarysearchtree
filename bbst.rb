@@ -66,13 +66,14 @@ class Tree
             return node.left if node.right.nil?
             return node.right if node.left.nil?        
 
-            #continue to work here for 2 child nodes
-            #inorder sucessor
-            temp = nil
-            if !node.right.nil?
-                temp = deleteNode(value, node.right)
-                puts temp.data
+            temp = node.right
+            while temp.left != nil
+                temp = temp.left
             end
+
+            node.data = temp.data
+            temp.data = value
+            deleteNode(value, node.right) 
         end
         node
     end
@@ -90,8 +91,7 @@ newTree.insertNode(22)
 newTree.insertNode(200)
 newTree.insertNode(199)
 newTree.insertNode(250)
-newTree.pretty_print
-newTree.deleteNode(67)
 newTree.insertNode(17)
+newTree.deleteNode(67)
 newTree.insertNode(18)
 newTree.pretty_print
