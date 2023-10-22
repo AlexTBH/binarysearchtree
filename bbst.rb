@@ -77,6 +77,41 @@ class Tree
         end
         node
     end
+
+    def findNode(value, node = root)
+
+        return nil if node.nil?
+
+        if value < node.data
+            findNode(value, node.left)
+        elsif value > node.data
+            findNode(value, node.right)
+        else
+            return node.data  
+        end 
+    end
+
+    def levelOrder(node = root)
+        nodeStack = [node]
+        nodeValues = []        
+        
+        while node.left != nil? && node.right != nil?
+
+            nodeStack.push(node.right) unless node.right.nil?
+            nodeStack.push(node.left) unless node.left.nil?
+
+            block_given? ? yield(node) : nodeValues.push(nodeStack[0].data)
+            
+            nodeStack.shift
+            break if nodeStack.empty?
+            node = nodeStack[0]
+        end
+        nodeValues unless block_given?
+    end
+
+    def inorder
+        
+    end
 end
 
 
@@ -88,10 +123,15 @@ newTree.insertNode(10)
 newTree.insertNode(11)
 newTree.insertNode(12)
 newTree.insertNode(22)
+newTree.insertNode(201)
 newTree.insertNode(200)
 newTree.insertNode(199)
 newTree.insertNode(250)
 newTree.insertNode(17)
+newTree.pretty_print    
 newTree.deleteNode(67)
 newTree.insertNode(18)
 newTree.pretty_print
+newTree.findNode(199)
+newTree.levelOrder {|node| puts node.data}
+
