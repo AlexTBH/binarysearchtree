@@ -110,7 +110,7 @@ class Tree
     end
 
     def inorder
-         #test  
+         #test2  
     end
 end
 
