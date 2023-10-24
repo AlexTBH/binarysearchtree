@@ -91,7 +91,8 @@ class Tree
         end 
     end
 
-    def levelOrder(node = root)
+    def levelOrder
+        node = root
         nodeStack = [node]
         nodeValues = []        
         
@@ -110,7 +111,10 @@ class Tree
     end
 
     def inorder
-         #test2  
+        
+
+
+         nodeValues unless block_given?   
     end
 end
 
