@@ -42,7 +42,6 @@ class Tree
         pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
     end
 
-    #Had to take at RoPalma 95 @ GitHub for solution since I couldn't figure out this one 
     def insertNode(value, node = root)
         reutrn nil if value == node.data
 
@@ -110,11 +109,17 @@ class Tree
         nodeValues unless block_given?
     end
 
-    def inorder
+    def inorder(node = root, result = [], &block)
+
+        unless node.nil?        
+
+            inorder(node.left, result, &block) if node.left != nil?
+            block_given? ? yield(node.data) : result << node.data
+            inorder(node.right, result, &block) if node.right != nil?
+        end
+
+        block_given? ? yield(result) : result
         
-
-
-         nodeValues unless block_given?   
     end
 end
 
@@ -135,7 +140,9 @@ newTree.insertNode(17)
 newTree.pretty_print    
 newTree.deleteNode(67)
 newTree.insertNode(18)
+newTree.insertNode(2)
 newTree.pretty_print
 newTree.findNode(199)
-newTree.levelOrder {|node| puts node.data}
+#newTree.levelOrder {|node| puts node.data}
+newTree.inorder
 
