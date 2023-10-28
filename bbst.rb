@@ -112,14 +112,33 @@ class Tree
     def inorder(node = root, result = [], &block)
 
         unless node.nil?        
-
             inorder(node.left, result, &block) if node.left != nil?
             block_given? ? yield(node.data) : result << node.data
             inorder(node.right, result, &block) if node.right != nil?
         end
 
         block_given? ? yield(result) : result
+    end
+
+    def preorder(node = root, result = [], &block)
         
+        unless node.nil?
+            block_given? ? yield(node.data) : result << node.data
+            preorder(node.left, result, &block)
+            preorder(node.right, result, &block)
+        end
+        block_given ? yield(result) : result
+    end
+
+    def postorder(node = root, result = [], &block)
+
+        unless node.nil?
+            postorder(node.left, result, &block)
+            postorder(node.right, result, &block)
+            block_given? ? yield(node.data) : result << node.data
+        end
+        block_given? ? yield(result) : result
+
     end
 end
 
@@ -143,6 +162,9 @@ newTree.insertNode(18)
 newTree.insertNode(2)
 newTree.pretty_print
 newTree.findNode(199)
-#newTree.levelOrder {|node| puts node.data}
+newTree.levelOrder
 newTree.inorder
+newTree.preorder
+newTree.postorder   
+
 
