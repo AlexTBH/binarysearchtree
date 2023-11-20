@@ -127,7 +127,7 @@ class Tree
             preorder(node.left, result, &block)
             preorder(node.right, result, &block)
         end
-        block_given ? yield(result) : result
+        block_given? ? yield(result) : result
     end
 
     def postorder(node = root, result = [], &block)
@@ -139,6 +139,38 @@ class Tree
         end
         block_given? ? yield(result) : result
 
+    end
+
+    def height(node = root, value)
+   
+
+        if node.data > value
+            height(node.left, value)
+        elsif node.data < value
+            height(node.right, value)
+        else
+
+            depth = 0
+            q = [node]
+            q << nil    
+            while q.length > 1
+
+                temp = q.shift
+                
+                if temp == nil
+                    depth += 1 
+                end
+
+                if temp != nil  
+                    q << temp.left if temp.left
+                    q << temp.right if temp.right   
+                elsif q != nil
+                    q << nil
+                end
+            end
+
+            return depth
+        end
     end
 end
 
@@ -162,9 +194,10 @@ newTree.insertNode(18)
 newTree.insertNode(2)
 newTree.pretty_print
 newTree.findNode(199)
-newTree.levelOrder
+p newTree.levelOrder
 newTree.inorder
 newTree.preorder
-newTree.postorder   
+newTree.postorder
+puts newTree.height(4)   
 
 
