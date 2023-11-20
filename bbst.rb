@@ -172,6 +172,28 @@ class Tree
             return depth
         end
     end
+
+    def depth(node = root, counter = 0, value)
+
+        return nil if node.nil?
+
+        if value == node.data
+            counter += 1
+            return counter
+        end
+
+        if value > node.data
+            depth(node.right, counter+=1, value)
+        else
+            depth(node.left, counter+=1, value)
+        end
+
+    end
+
+    def balanced?
+        
+    end
+
 end
 
 
@@ -198,6 +220,6 @@ p newTree.levelOrder
 newTree.inorder
 newTree.preorder
 newTree.postorder
-puts newTree.height(4)   
-
+newTree.height(4)   
+p newTree.depth(8)
 
