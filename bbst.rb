@@ -190,8 +190,23 @@ class Tree
 
     end
 
-    def balanced?
-        
+    def balanced?(node = root)
+
+        tempRight = node.right
+        tempLeft = node.left  
+            
+        ltree = height(tempLeft.data)
+        rtree = height(tempRight.data)
+
+        if (ltree + rtree) / 2 < 2 
+            return "Unbalaned"
+        else
+            return "Balanced"
+        end
+    end
+
+    def rebalance
+        self.root = build_tree(inorder)
     end
 
 end
@@ -216,10 +231,12 @@ newTree.insertNode(18)
 newTree.insertNode(2)
 newTree.pretty_print
 newTree.findNode(199)
-p newTree.levelOrder
+newTree.levelOrder
 newTree.inorder
 newTree.preorder
 newTree.postorder
 newTree.height(4)   
-p newTree.depth(8)
-
+newTree.depth(8)
+newTree.balanced?
+newTree.rebalance
+newTree.pretty_print
