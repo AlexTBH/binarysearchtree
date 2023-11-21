@@ -141,9 +141,12 @@ class Tree
 
     end
 
+    #Currently accepts a value, change it to node
+    #Work on this
     def height(node = root, value)
    
-
+        return nil if node.nil?
+        
         if node.data > value
             height(node.left, value)
         elsif node.data < value
@@ -192,17 +195,12 @@ class Tree
 
     def balanced?(node = root)
 
-        tempRight = node.right
-        tempLeft = node.left  
-            
-        ltree = height(tempLeft.data)
-        rtree = height(tempRight.data)
+        #check the height for subtress and compare them
 
-        if (ltree + rtree) / 2 < 2 
-            return "Unbalaned"
-        else
-            return "Balanced"
-        end
+        ltree = height(node.left)
+        rtree = height(node.right)
+
+
     end
 
     def rebalance
@@ -235,8 +233,10 @@ newTree.levelOrder
 newTree.inorder
 newTree.preorder
 newTree.postorder
-newTree.height(4)   
+p newTree.height(4)   
 newTree.depth(8)
 newTree.balanced?
 newTree.rebalance
 newTree.pretty_print
+
+
