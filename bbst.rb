@@ -141,40 +141,27 @@ class Tree
 
     end
 
-    #Currently accepts a value, change it to node
-    #Work on this
-    def height(node = root, value)
    
-        return nil if node.nil?
-        
-        if node.data > value
-            height(node.left, value)
-        elsif node.data < value
-            height(node.right, value)
-        else
+    def height(node = root) 
 
-            depth = 0
-            q = [node]
-            q << nil    
-            while q.length > 1
+        return -1 if node.nil?
 
-                temp = q.shift
-                
-                if temp == nil
-                    depth += 1 
-                end
+        [height(node.left), height(node.right)].max + 1
 
-                if temp != nil  
-                    q << temp.left if temp.left
-                    q << temp.right if temp.right   
-                elsif q != nil
-                    q << nil
-                end
-            end
 
-            return depth
-        end
     end
+
+    def balanced?(node = root)
+
+        return true if node.nil?
+
+        ltree = height(node.left)
+        rtree = height(node.right)
+
+        (ltree - rtree).abs < 2 && balanced?(node.left) && balanced?(node.right) ? true : false
+
+    end
+
 
     def depth(node = root, counter = 0, value)
 
@@ -190,16 +177,6 @@ class Tree
         else
             depth(node.left, counter+=1, value)
         end
-
-    end
-
-    def balanced?(node = root)
-
-        #check the height for subtress and compare them
-
-        ltree = height(node.left)
-        rtree = height(node.right)
-
 
     end
 
@@ -233,10 +210,13 @@ newTree.levelOrder
 newTree.inorder
 newTree.preorder
 newTree.postorder
-p newTree.height(4)   
+newTree.height   
 newTree.depth(8)
-newTree.balanced?
 newTree.rebalance
 newTree.pretty_print
-
+newTree.insertNode(16)
+newTree.pretty_print
+newTree.rebalance   
+newTree.pretty_print
+p newTree.balanced?
 
